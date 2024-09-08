@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("clientes")
 public class ClienteController {
@@ -18,13 +20,13 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.listarTodos());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> listarPorId(@PathVariable Long id){
+    public ResponseEntity<Optional<Cliente>> listarPorId(@PathVariable Long id){
         return ResponseEntity.ok(clienteService.buscarPorId(id));
     }
 
     @PostMapping
     public ResponseEntity<Cliente> inserir(@RequestBody Cliente cliente){
-        clienteService.salvar(cliente);
+        clienteService.inserir(cliente);
         return ResponseEntity.ok(cliente);
     }
 
